@@ -1,0 +1,15 @@
+[2026-11-22 12:00:59] [INFO] Cliente registrado: Cliente [CC 123456] Jacob Baena | Correo: Jacob@hotmail.com | Tel: 3104230000
+[2026-11-22 12:00:59] [INFO] Cliente registrado: Cliente [CC 132654] Michael Baena | Correo:  mb01@hotmail.com | Tel: 3059876543
+[2026-11-22 12:00:59] [ERROR] Fallo registro de cliente CC 023145 | Excepcion: DatoInvalidoError: Correo invalido: 'camiloMB.com'.
+[2026-11-22 12:00:59] [ERROR] Fallo registro de cliente CC 258963 | Excepcion: ParametroFaltanteError: El nombre del cliente no puede estar vacio.
+[2026-11-22 12:00:59] [INFO] Servicio creado: Sala [Sala001] Sala Reuniones (Capacidad: 1, con proyector) | Tarifa: $8,000.00 | Estado: Disponible
+[2026-11-22 12:00:59] [INFO] Servicio creado: Alquiler [equipo001] Portatil Macbook (Equipos: 2, con seguro) | Tarifa: $5,000.00 | Estado: Disponible
+[2026-11-22 12:00:59] [INFO] Servicio creado: Asesoria [asesoria001] Polaris PH (Area: estructural, Presencial) | Tarifa: $100,000.00 | Estado: Disponible
+[2026-11-22 12:00:59] [ERROR] Fallo creacion de servicio ReservaSala | Excepcion: DatoInvalidoError: La tarifa base debe ser mayor a cero.
+[2026-11-22 12:00:59] [INFO] Reserva creada: Reserva [RSala001] | Cliente: Jacob Baena | Servicio: Sala Reuniones | Horas: 3 | Estado: Pendiente | Total: $0.00
+[2026-11-22 12:00:59] [INFO] Accion 'confirmar' exitosa: Reserva [RSala001] | Cliente: Jacob Baena | Servicio: Sala Reuniones | Horas: 3 | Estado: Confirmada | Total: $0.00
+[2026-11-22 12:00:59] [INFO] Accion 'procesar' exitosa: Reserva [RSala001] | Cliente: Jacob Baena | Servicio: Sala Reuniones | Horas: 3 | Estado: Procesada | Total: $40,817.00
+[2026-11-22 12:00:59] [ERROR] Fallo en creacion de reserva RSala001 | Excepcion: ReservaError: No se pudo crear la reserva RSala001. | Causa original: ServicioNoDisponibleError: El servicio 'Sala Reuniones' no esta disponible.
+[2026-11-22 12:00:59] [INFO] Reserva creada: Reserva [Requipo001] | Cliente: Jacob Baena | Servicio: Portatil Macbook | Horas: 5 | Estado: Pendiente | Total: $0.00
+[2026-11-22 12:00:59] [INFO] Accion 'confirmar' exitosa: Reserva [Requipo001] | Cliente: Jacob Baena | Servicio: Portatil Macbook | Horas: 5 | Estado: Confirmada | Total: $0.00
+[2026-11-22 12:00:59] [ERROR] Fallo al procesar reserva | Excepcion: ReservaError: Error al procesar el cobro de la reserva Requipo001. | Causa original: CalculoInconsistenteError: El porcentaje de descuento debe estar entre 0 y 100.
