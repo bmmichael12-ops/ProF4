@@ -1,22 +1,41 @@
 # ProF4
 Fase 4 - Componente practico - practicas simuladas
 
-Sistema Integral de Gestión de Clientes, Servicios y Reservas
 
-deberá desarrollar un sistema integral orientado a objetos, sin uso de bases de datos, capaz de gestionar clientes, servicios y reservas para una empresa llamada Software FJ que ofrece varios tipos de servicios (reservas de salas, alquiler de equipos y asesorías especializadas). El objetivo de esta tarea es construir una aplicación estable, modular y extensible que implemente de forma rigurosa los principios de abstracción, herencia, polimorfismo, encapsulación y manejo avanzado de excepciones, garantizando que el sistema siga funcionando aun cuando se presenten errores durante su ejecución.
 
-El sistema debe incluir clases abstractas, clases derivadas, métodos sobrecargados, manejo de listas internas y validaciones estrictas, demostrando un diseño orientado a objetos completamente funcional. La información no debe almacenarse en bases de datos; toda la gestión debe hacerse mediante objetos, listas y manejo de archivos únicamente para el registro de eventos y errores Como parte esencial de la tarea, el sistema deberá incorporar manejo robusto de excepciones, incluyendo excepciones personalizadas, uso de bloques try/except, try/except/else, try/except/finally, y encadenamiento de excepciones. Cada error detectado debe registrarse en un archivo de logs, manteniendo la aplicación activa y estable en todo momento. El sistema debe ser capaz de manejar errores provenientes de datos inválidos, parámetros faltantes, operaciones no permitidas, intentos de reserva incorrectos, servicios no disponibles, cálculos inconsistentes y cualquier otra situación que pueda comprometer la operación normal de la aplicación.
+## Sistema Integral de Gestión de Clientes, Servicios y Reservas - Software FJ
 
-El trabajo debe basarse en una arquitectura orientada a objetos, incluyendo al menos:
-Una clase abstracta que represente entidades generales del sistema.
+Proyecto desarrollado de manera individual para el curso Programación (213023) - Fase 4  
+Universidad Nacional Abierta y a Distancia.
 
-• Una clase Cliente con validaciones robustas y encapsulación de datos personales.
+**Estudiante:** Michael Stwear Baena Marin  
+**Cédula:** 1214715704  
 
-• Una clase abstracta Servicio y al menos tres servicios especializados que hereden de ella, implementando polimorfismo y métodos sobrescritos para calcular costos, describir servicios y validar parámetros.
+## Descripción
 
-•Una clase Reserva que integre cliente, servicio, duración y estado, e implemente confirmación, cancelación y procesamiento con manejo de excepciones.
+Aplicación de consola en Python creada para administrar los siguientes datos: clientes, servicios y reservas de la empresa **Software FJ**. Todo el manejo de datos se realiza en memoria usando objetos y listas sin depender de bases de datos externas. Genera un archivo externo al ejecutar el programa que es un registro de eventos y errores (`logs_software_fj.txt`).
 
-•Métodos sobrecargados (por ejemplo, diferentes variantes del cálculo de costos con impuestos, descuentos o parámetros opcionales).
-Un archivo de logs donde se registren todos los errores y eventos relevantes.
+El objetivo principal del proyecto es mantener la aplicación estable frente a datos incorrectos, operaciones inválidas o fallos en los cálculos sin que la ejecución se detenga.
 
-El sistema, sin utilizar ningún motor de base de datos, debe simular al menos 10 operaciones completas, incluyendo registros válidos e inválidos de clientes, creación correcta e incorrecta de servicios, y reservas exitosas y fallidas, demostrando la capacidad del programa para continuar funcionando ante errores graves y manejar excepciones de manera controlada y profesional.
+
+## Programación Orientada a Objetos (POO)
+* **Abstracción:** las Clases base abstractas `Entidad` y `Servicio` implementadas con el módulo `abc`.
+* **Encapsulación:** los Atributos privados con acceso controlado mediante decoradores `@property` y validaciones internas en `Cliente`, `Servicio` y `Reserva`.
+* **Herencia y Polimorfismo:** Tres tipos de servicios heredan de `Servicio` (`ReservaSala`, `AlquilerEquipo` y `AsesoriaEspecializada`). Cada uno sobrescribe `validar_parametros()`, `describir_servicio()` y `calcular_costo()` con reglas de negocio propias.
+* **Sobrecarga de métodos:** El método `calcular_costo()` acepta parámetros opcionales (`impuesto`, `descuento`, `recargo`) para adaptarse a distintos escenarios de facturación.
+
+## Manejo avanzado de excepciones
+* **Jerarquía de excepciones personalizadas:** `ErrorSistemaFJ` como base para `DatoInvalidoError`, `ParametroFaltanteError`, `ServicioNoDisponibleError`, `OperacionNoPermitidaError`, `CalculoInconsistenteError` y `ReservaError`.
+* **Estructuras de control:** Uso de bloques `try/except`, `try/except/else` y `try/except/finally` a lo largo del flujo de registro y reservas.
+* **Encadenamiento de excepciones:** Uso de `raise ... from e` para conservar el error original al propagar fallos en la creación o el procesamiento de reservas.
+* **Registro de logs:** La clase `GestorLogs` guarda automáticamente la fecha, hora, nivel (`INFO` o `ERROR`), mensaje y causa de cada evento en `logs_software_fj.txt`.
+
+## Requisitos
+
+* Python 3.8 o superior.
+* No requiere librerías externas.
+
+## Cómo ejecutar el proyecto
+
+   git clone <https://github.com/bmmichael12-ops/ProF4.git>
+   
