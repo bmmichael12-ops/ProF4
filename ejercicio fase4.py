@@ -10,7 +10,6 @@ from abc import ABC, abstractmethod
 from datetime import datetime
 
 
-
 # EXCEPCIONES PERSONALIZADAS
 
 # Excepcion base del sistema para agrupar todos los errores controlados
@@ -67,42 +66,41 @@ class GestorLogs:
 
 
 
-# CLASE ABSTRACTA BASE DEL SISTEMA
 
-
-# Clase abstracta que representa cualquier entidad principal de Software FJ
+# Clase que representa cualquier entidad principal de Software FJ
 class Entidad(ABC):
     def __init__(self, id_entidad):
         if not id_entidad or not str(id_entidad).strip():
-            raise ParametroFaltanteError("El ID de la entidad es obligatorio.")
+            raise ParametroFaltanteError(" ID de la entidad es obligatorio.")
         self.__id_entidad = str(id_entidad).strip()
 
     @property
     def id_entidad(self):
         return self.__id_entidad
 
-    # Metodo abstracto para validar los datos propios de cada entidad
+    # Metodo para validar los datos propios de cada entidad
     @abstractmethod
     def validar(self):
         pass
 
-    # Metodo abstracto para devolver una descripcion corta del objeto
+    # Metodo para devolver una descripcion corta del objeto
     @abstractmethod
     def obtener_resumen(self):
         pass
 
 
-
 # CLASE CLIENTE CON ENCAPSULACION Y VALIDACIONES
 
 
-# Clase que modela a los clientes y protege sus datos personales
+# Clase que modela informacion de los clientes y protege sus datos personales
+# ID,nombre,correo y telefono
+
 class Cliente(Entidad):
     def __init__(self, id_cliente, nombre, correo, telefono):
-        super().__init__(id_cliente)
+        super().__init__(id_cliente)   # ID sera numero de cedula.
         self.__nombre = nombre
         self.__correo = correo
-        self.__telefono = telefono
+        self.__telefono = telefono # Celular
         self.validar()
 
     @property
@@ -117,7 +115,8 @@ class Cliente(Entidad):
     def telefono(self):
         return self.__telefono
 
-    # Validacion estricta de campos obligatorios y formato de contacto
+    # Validacion de campos obligatorios y formato de contacto
+
     def validar(self):
         if not self.__nombre or not str(self.__nombre).strip():
             raise ParametroFaltanteError("El nombre del cliente no puede estar vacio.")
@@ -136,14 +135,12 @@ class Cliente(Entidad):
 
 
 
-# CLASE ABSTRACTA SERVICIO Y CLASES ESPECIALIZADAS
+# Clase base para los servicios ofrecidos por Software FJ 
 
-
-# Clase abstracta base para los servicios ofrecidos por Software FJ
 class Servicio(Entidad):
     def __init__(self, id_servicio, nombre, tarifa_base):
-        super().__init__(id_servicio)
-        self.__nombre = nombre
+        super().__init__(id_servicio)                        # codigo interno que inventemos para codificar el servicio
+        self.__nombre = nombre      
         self.__tarifa_base = tarifa_base
         self.__disponible = True
         self.validar()
@@ -281,10 +278,8 @@ class AsesoriaEspecializada(Servicio):
     def describir_servicio(self):
         return f"Asesoria [{self.id_entidad}] {self.nombre} (Area: {self.__especialidad}, {self.__modalidad})"
 
-
-
 # CLASE RESERVA
-
+# aqui nos encargaremos de todos los datos de las reservas  
 
 # Clase que integra cliente, servicio, duracion y ciclo de vida de la reserva
 class Reserva(Entidad):
@@ -350,10 +345,7 @@ class Reserva(Entidad):
             f"Servicio: {self.__servicio.nombre} | Horas: {self.__duracion} | "
             f"Estado: {self.__estado} | Total: ${self.__costo_total:,.2f}"
         )
-
-
-
-# GESTOR PRINCIPAL DEL SISTEMA 
+ 
 
 # Clase coordinadora que maneja las listas en memoria y el control de errores
 class SistemaSoftwareFJ:
@@ -412,7 +404,7 @@ class SistemaSoftwareFJ:
     def ejecutar_accion_reserva(self, reserva, accion, **kwargs):
         try:
             if reserva is None:
-                raise ParametroFaltanteError("No existe una reserva valida para operar.")
+                raise ParametroFaltanteError("No existe una reserva valida.")
             if accion == "confirmar":
                 reserva.confirmar()
             elif accion == "cancelar":
@@ -435,10 +427,10 @@ class SistemaSoftwareFJ:
 
 
 def ejecutar_simulacion():
-    print("=" * 75)
+    print("\n")
     print("SISTEMA INTEGRAL DE GESTION - SOFTWARE FJ")
     print("Fecha de ejecucion:", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-    print("=" * 75)
+    print("_" * 60)
 
     sistema = SistemaSoftwareFJ()
 
@@ -447,6 +439,9 @@ def ejecutar_simulacion():
 
     print("\n---  2: Registro valido de cliente ---")
     c2 = sistema.registrar_cliente("CC 132654", "Michael Baena", " mb01@hotmail.com", "3059876543")
+
+    print("\n---  2: Registro valido de cliente ---")
+    c3 = sistema.registrar_cliente("CC 1098123", "Julieth K", " JK1201@hotmail.com", "305454515")
 
     print("\n---  3: Registro invalido de cliente ---")
     sistema.registrar_cliente("CC 023145", "Camilo Marin", "camiloMB.com", "3125554433")
@@ -480,13 +475,13 @@ def ejecutar_simulacion():
     sistema.ejecutar_accion_reserva(r4, "procesar", impuesto=0.19, descuento=150.0)
 
     # Resumen final para comprobar que el sistema termino estable
-    print("\n" + "=" * 75)
+    print("\n")
     print("RESUMEN FINAL DE EJECUCION (SIN INTERRUPCIONES)")
     print(f"Clientes validos registrados: {len(sistema.clientes)}")
     print(f"Servicios validos registrados: {len(sistema.servicios)}")
     print(f"Reservas creadas en memoria: {len(sistema.reservas)}")
     print("Registro detallado guardado en: logs_software_fj.txt")
-    print("=" * 75)
+    print("-" * 60)
 
 
 if __name__ == "__main__":
